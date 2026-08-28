@@ -1643,6 +1643,14 @@ class AnthropicHandlerMixin:
                         # `prefix_tracker` clamped by `compute_frozen_count`.
                         cache_frozen_count = comp_cache.compute_frozen_count(messages)
                         frozen_message_count = min(frozen_message_count, cache_frozen_count)
+                        if os.environ.get("HEADROOM_FROZEN_TRACE"):
+                            import sys as _s
+                            print(
+                                f"[frozen] anthropic nmsg={len(messages)} "
+                                f"tracker={tracker_frozen_count} "
+                                f"compute={cache_frozen_count} "
+                                f"final={frozen_message_count} (min)",
+                                file=_s.stderr, flush=True)
                         # Record all tool_results in the verified frozen prefix as stable
                         comp_cache.mark_stable_from_messages(messages, frozen_message_count)
 

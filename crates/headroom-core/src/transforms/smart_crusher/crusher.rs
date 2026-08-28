@@ -45,7 +45,10 @@ use super::compaction::{
     CompactConfig, Compaction, CompactionStage,
 };
 use super::config::SmartCrusherConfig;
-use super::crushers::{compute_k_split, crush_number_array, crush_object, crush_string_array};
+use super::crushers::{
+    compute_k_split, crush_number_array, crush_object, crush_string_array,
+    crush_string_array_with_query,
+};
 use super::planning::SmartCrusherPlanner;
 use super::traits::{Constraint, CrushEvent, Observer};
 use super::types::{CompressionPlan, CompressionStrategy, CrushResult};
@@ -577,7 +580,16 @@ impl SmartCrusher {
                         }
                         ArrayType::StringArray => {
                             let strs: Vec<&str> = arr.iter().filter_map(|v| v.as_str()).collect();
-                            let (crushed, strategy) = crush_string_array(&strs, &self.config, bias);
+                            // `query_context` is already in scope here and is
+                            // threaded into the DictArray and MixedArray
+                            // branches; this branch previously dropped it.
+                            let (crushed, strategy) = crush_string_array_with_query(
+                                &strs,
+                                &self.config,
+                                bias,
+                                query_context,
+                                Some(&*self.scorer),
+                            );
                             info_parts.push(format!("{}({}->{})", strategy, n, crushed.len()));
                             let crushed_values: Vec<Value> =
                                 crushed.into_iter().map(Value::String).collect();

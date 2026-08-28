@@ -1,0 +1,66 @@
+[
+  {
+    "turn": 1,
+    "target": "src/auth/adapter_021.py",
+    "said_yes": true,
+    "in_context": true,
+    "items_in_context": 16,
+    "correct": true
+  },
+  {
+    "turn": 2,
+    "target": "src/auth/adapter_022.py",
+    "said_yes": true,
+    "in_context": true,
+    "items_in_context": 16,
+    "correct": true
+  },
+  {
+    "turn": 3,
+    "target": "src/auth/adapter_023.py",
+    "said_yes": true,
+    "in_context": true,
+    "items_in_context": 16,
+    "correct": true
+  },
+  {
+    "turn": 4,
+    "target": "src/auth/client_006.py",
+    "said_yes": true,
+    "in_context": true,
+    "items_in_context": 16,
+    "correct": true
+  },
+  {
+    "turn": 5,
+    "target": "src/auth/store_009.py",
+    "said_yes": true,
+    "in_context": true,
+    "items_in_context": 16,
+    "correct": true
+  },
+  {
+    "turn": 6,
+    "target": "src/auth/store_010.py",
+    "said_yes": true,
+    "in_context": true,
+    "items_in_context": 16,
+    "correct": true
+  },
+  {
+    "turn": 7,
+    "target": "src/auth/store_011.py",
+    "said_yes": true,
+    "in_context": true,
+    "items_in_context": 16,
+    "correct": true
+  },
+  {
+    "turn": 8,
+    "target": "src/auth/utils_015.py",
+    "said_yes": true,
+    "in_context": true,
+    "items_in_context": 16,
+    "correct": true
+  }
+]

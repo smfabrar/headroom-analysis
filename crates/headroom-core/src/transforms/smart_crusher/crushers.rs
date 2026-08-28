@@ -35,6 +35,7 @@ use std::collections::{BTreeSet, HashSet};
 
 use super::config::SmartCrusherConfig;
 use super::error_keywords::ERROR_KEYWORDS;
+use crate::relevance::{BM25Scorer, RelevanceScorer};
 use super::stats_math::{format_g, mean, median, sample_stdev};
 use crate::transforms::adaptive_sizer::compute_optimal_k;
 
@@ -99,6 +100,121 @@ pub fn compute_k_split(
     (k_total, k_first, k_last, k_importance)
 }
 
+/// Env gate for query-aware scalar retention. Default **off**, so the
+/// unmodified selection path stays byte-identical to upstream.
+///
+/// Set `HEADROOM_QUERY_AWARE_SCALARS=1` to enable.
+pub fn query_aware_scalars_enabled() -> bool {
+    static ON: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
+    *ON.get_or_init(|| {
+        matches!(
+            std::env::var("HEADROOM_QUERY_AWARE_SCALARS").as_deref(),
+            Ok("1") | Ok("true") | Ok("TRUE") | Ok("yes")
+        )
+    })
+}
+
+/// Fraction of the K budget that query-relevant items may claim.
+///
+/// Capped deliberately: relevance-only selection would return K
+/// near-identical items and destroy the representative sample that
+/// summary questions ("how many?", "what is the spread?") depend on.
+/// This is the diversity floor.
+fn relevance_budget_fraction() -> f64 {
+    static F: std::sync::OnceLock<f64> = std::sync::OnceLock::new();
+    *F.get_or_init(|| {
+        std::env::var("HEADROOM_QUERY_AWARE_FRACTION")
+            .ok()
+            .and_then(|v| v.parse::<f64>().ok())
+            .filter(|v| (0.0..=1.0).contains(v))
+            .unwrap_or(0.3)
+    })
+}
+
+/// Lexical scorer used for scalar arrays.
+///
+/// Deliberately **not** the crusher's default `HybridScorer`. Measured
+/// (`research/result-04`): on opaque identifiers the embedding half of the
+/// hybrid assigns every item an identical score (0.5000 for all 200 invoice
+/// IDs), because short IDs are semantically indistinguishable. That collapses
+/// ranking to index order. Pure BM25 ranks the queried item first, because a
+/// quoted identifier is maximally discriminative by IDF precisely when
+/// documents are short.
+fn scalar_scorer() -> &'static BM25Scorer {
+    static S: std::sync::OnceLock<BM25Scorer> = std::sync::OnceLock::new();
+    S.get_or_init(BM25Scorer::default)
+}
+
+/// Minimum spread (max - min) required before scores are treated as signal.
+const MIN_SCORE_SPREAD: f64 = 1e-6;
+
+/// Pin items scoring at least this fraction of the batch maximum.
+///
+/// Relative, not absolute: BM25 scores over short documents are small in
+/// absolute terms (a rank-1 exact match measured 0.208), so the config's
+/// absolute `relevance_threshold` of 0.3 would reject a perfect match.
+fn relevance_relative_floor() -> f64 {
+    static F: std::sync::OnceLock<f64> = std::sync::OnceLock::new();
+    *F.get_or_init(|| {
+        std::env::var("HEADROOM_QUERY_AWARE_FLOOR")
+            .ok()
+            .and_then(|v| v.parse::<f64>().ok())
+            .filter(|v| (0.0..=1.0).contains(v))
+            .unwrap_or(0.5)
+    })
+}
+
+/// Select indices to pin by relevance to `query`.
+///
+/// Returns an empty set — so the caller behaves exactly as baseline — when
+/// the gate is off, the query is empty, or **the scores carry no signal**.
+/// "No signal" means zero *spread*, not zero value: a scorer that rates every
+/// item identically is uninformative regardless of the magnitude it picked.
+fn relevance_pins(
+    items: &[&str],
+    query: &str,
+    _scorer: Option<&(dyn RelevanceScorer + Send + Sync)>,
+    _config: &SmartCrusherConfig,
+    k_total: usize,
+) -> BTreeSet<usize> {
+    let mut pins = BTreeSet::new();
+    if !query_aware_scalars_enabled() || query.trim().is_empty() || k_total == 0 {
+        return pins;
+    }
+
+    let scores: Vec<f64> = scalar_scorer()
+        .score_batch(items, query)
+        .iter()
+        .map(|s| s.score)
+        .collect();
+    let max = scores.iter().cloned().fold(f64::NEG_INFINITY, f64::max);
+    let min = scores.iter().cloned().fold(f64::INFINITY, f64::min);
+    if !(max.is_finite() && min.is_finite()) || max - min <= MIN_SCORE_SPREAD {
+        return pins; // uninformative -- defer to sampling
+    }
+
+    let cutoff = max * relevance_relative_floor();
+    let budget = ((relevance_budget_fraction() * k_total as f64).round() as usize)
+        .clamp(1, k_total);
+
+    let mut ranked: Vec<(usize, f64)> = scores
+        .iter()
+        .enumerate()
+        .map(|(i, sc)| (i, *sc))
+        .filter(|(_, sc)| *sc >= cutoff)
+        .collect();
+    ranked.sort_by(|a, b| {
+        b.1.partial_cmp(&a.1)
+            .unwrap_or(std::cmp::Ordering::Equal)
+            .then(a.0.cmp(&b.0))
+    });
+
+    for (i, _) in ranked.into_iter().take(budget) {
+        pins.insert(i);
+    }
+    pins
+}
+
 /// Crush an array of strings.
 ///
 /// Strategy (Python `_crush_string_array`):
@@ -114,6 +230,21 @@ pub fn crush_string_array(
     items: &[&str],
     config: &SmartCrusherConfig,
     bias: f64,
+) -> (Vec<String>, String) {
+    crush_string_array_with_query(items, config, bias, "", None)
+}
+
+/// Query-aware variant of [`crush_string_array`].
+///
+/// With the gate off (the default) this is byte-identical to the
+/// original: `relevance_pins` returns an empty set and every subsequent
+/// step is unchanged.
+pub fn crush_string_array_with_query(
+    items: &[&str],
+    config: &SmartCrusherConfig,
+    bias: f64,
+    query: &str,
+    scorer: Option<&(dyn RelevanceScorer + Send + Sync)>,
 ) -> (Vec<String>, String) {
     let n = items.len();
     if n <= 8 {
@@ -160,8 +291,14 @@ pub fn crush_string_array(
     let last_start = n.saturating_sub(k_last);
     let last_indices: BTreeSet<usize> = (last_start..n).collect();
 
+    // 3b. Query-relevance pins (empty unless the gate is on).
+    //     Added *within* k_total, so the stride fill below shrinks to
+    //     compensate and the output size does not grow.
+    let pin_indices = relevance_pins(items, query, scorer, config, k_total);
+
     // 4. Combine.
     let mut keep_indices: BTreeSet<usize> = BTreeSet::new();
+    keep_indices.extend(pin_indices.iter().copied());
     keep_indices.extend(error_indices.iter().copied());
     keep_indices.extend(anomaly_indices.iter().copied());
     keep_indices.extend(first_indices.iter().copied());
@@ -206,6 +343,9 @@ pub fn crush_string_array(
     }
     if !error_indices.is_empty() {
         strategy.push_str(&format!(",errors={}", error_indices.len()));
+    }
+    if !pin_indices.is_empty() {
+        strategy.push_str(&format!(",relevance={}", pin_indices.len()));
     }
     strategy.push(')');
 

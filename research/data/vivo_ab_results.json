@@ -1,0 +1,186 @@
+{
+  "off": [
+    {
+      "target": "src/auth/adapter_021.py",
+      "ground_truth": true,
+      "answer": "Yes",
+      "said_yes": true,
+      "correct": true,
+      "target_in_context": true,
+      "n_forwarded": 16
+    },
+    {
+      "target": "src/billing/client_030.py",
+      "ground_truth": true,
+      "answer": "No.",
+      "said_yes": false,
+      "correct": false,
+      "target_in_context": false,
+      "n_forwarded": 16
+    },
+    {
+      "target": "src/session/router_060.py",
+      "ground_truth": true,
+      "answer": "No",
+      "said_yes": false,
+      "correct": false,
+      "target_in_context": false,
+      "n_forwarded": 16
+    },
+    {
+      "target": "src/worker/store_075.py",
+      "ground_truth": false,
+      "answer": "No",
+      "said_yes": false,
+      "correct": true,
+      "target_in_context": false,
+      "n_forwarded": 16
+    },
+    {
+      "target": "src/cache/utils_101.py",
+      "ground_truth": false,
+      "answer": "No",
+      "said_yes": false,
+      "correct": true,
+      "target_in_context": false,
+      "n_forwarded": 16
+    },
+    {
+      "target": "src/proxy/adapter_141.py",
+      "ground_truth": true,
+      "answer": "No",
+      "said_yes": false,
+      "correct": false,
+      "target_in_context": false,
+      "n_forwarded": 16
+    },
+    {
+      "target": "src/codec/service_162.py",
+      "ground_truth": true,
+      "answer": "No.",
+      "said_yes": false,
+      "correct": false,
+      "target_in_context": false,
+      "n_forwarded": 16
+    },
+    {
+      "target": "src/search/handler_180.py",
+      "ground_truth": false,
+      "answer": "No",
+      "said_yes": false,
+      "correct": true,
+      "target_in_context": false,
+      "n_forwarded": 16
+    },
+    {
+      "target": "src/index/manager_216.py",
+      "ground_truth": false,
+      "answer": "No",
+      "said_yes": false,
+      "correct": true,
+      "target_in_context": false,
+      "n_forwarded": 16
+    },
+    {
+      "target": "src/zzz/nonexistent_999.py",
+      "ground_truth": false,
+      "answer": "No",
+      "said_yes": false,
+      "correct": true,
+      "target_in_context": false,
+      "n_forwarded": 16
+    }
+  ],
+  "on": [
+    {
+      "target": "src/auth/adapter_021.py",
+      "ground_truth": true,
+      "answer": "Yes",
+      "said_yes": true,
+      "correct": true,
+      "target_in_context": true,
+      "n_forwarded": 16
+    },
+    {
+      "target": "src/billing/client_030.py",
+      "ground_truth": true,
+      "answer": "No",
+      "said_yes": false,
+      "correct": false,
+      "target_in_context": false,
+      "n_forwarded": 16
+    },
+    {
+      "target": "src/session/router_060.py",
+      "ground_truth": true,
+      "answer": "No",
+      "said_yes": false,
+      "correct": false,
+      "target_in_context": false,
+      "n_forwarded": 16
+    },
+    {
+      "target": "src/worker/store_075.py",
+      "ground_truth": false,
+      "answer": "No",
+      "said_yes": false,
+      "correct": true,
+      "target_in_context": false,
+      "n_forwarded": 16
+    },
+    {
+      "target": "src/cache/utils_101.py",
+      "ground_truth": false,
+      "answer": "No",
+      "said_yes": false,
+      "correct": true,
+      "target_in_context": false,
+      "n_forwarded": 16
+    },
+    {
+      "target": "src/proxy/adapter_141.py",
+      "ground_truth": true,
+      "answer": "No",
+      "said_yes": false,
+      "correct": false,
+      "target_in_context": false,
+      "n_forwarded": 16
+    },
+    {
+      "target": "src/codec/service_162.py",
+      "ground_truth": true,
+      "answer": "No",
+      "said_yes": false,
+      "correct": false,
+      "target_in_context": false,
+      "n_forwarded": 16
+    },
+    {
+      "target": "src/search/handler_180.py",
+      "ground_truth": false,
+      "answer": "No",
+      "said_yes": false,
+      "correct": true,
+      "target_in_context": false,
+      "n_forwarded": 16
+    },
+    {
+      "target": "src/index/manager_216.py",
+      "ground_truth": false,
+      "answer": "No.",
+      "said_yes": false,
+      "correct": true,
+      "target_in_context": false,
+      "n_forwarded": 16
+    },
+    {
+      "target": "src/zzz/nonexistent_999.py",
+      "ground_truth": false,
+      "answer": "No",
+      "said_yes": false,
+      "correct": true,
+      "target_in_context": false,
+      "n_forwarded": 16
+    }
+  ]
+}

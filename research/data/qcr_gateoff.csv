@@ -1,0 +1,251 @@
+arm,content_type,n,pos,question,target,target_kept,n_kept,bytes_in,bytes_out,compressed,head10_kept
+gateoff,invoice_ids,20,0,needle,INV-2026-0001,1,15,870,764,1,
+gateoff,invoice_ids,20,3,needle,INV-2026-0004,1,15,870,764,1,
+gateoff,invoice_ids,20,5,needle,INV-2026-0006,1,15,870,764,1,
+gateoff,invoice_ids,20,6,needle,INV-2026-0007,1,15,870,764,1,
+gateoff,invoice_ids,20,10,needle,INV-2026-0011,1,15,871,765,1,
+gateoff,invoice_ids,20,15,needle,INV-2026-0016,0,15,871,765,1,
+gateoff,invoice_ids,20,19,needle,INV-2026-0020,1,15,871,765,1,
+gateoff,invoice_ids,20,-1,count,,,15,853,747,1,10
+gateoff,invoice_ids,20,-1,first,,,15,839,733,1,10
+gateoff,invoice_ids,20,-1,spread,,,15,890,784,1,10
+gateoff,invoice_ids,60,0,needle,INV-2026-0001,1,15,1630,764,1,
+gateoff,invoice_ids,60,3,needle,INV-2026-0004,1,15,1630,764,1,
+gateoff,invoice_ids,60,15,needle,INV-2026-0016,1,15,1631,765,1,
+gateoff,invoice_ids,60,16,needle,INV-2026-0017,0,15,1631,765,1,
+gateoff,invoice_ids,60,30,needle,INV-2026-0031,1,15,1631,765,1,
+gateoff,invoice_ids,60,45,needle,INV-2026-0046,1,15,1631,765,1,
+gateoff,invoice_ids,60,59,needle,INV-2026-0060,1,15,1631,765,1,
+gateoff,invoice_ids,60,-1,count,,,15,1613,747,1,5
+gateoff,invoice_ids,60,-1,first,,,15,1599,733,1,5
+gateoff,invoice_ids,60,-1,spread,,,15,1650,784,1,5
+gateoff,invoice_ids,150,0,needle,INV-2026-0001,1,15,3341,765,1,
+gateoff,invoice_ids,150,3,needle,INV-2026-0004,1,15,3341,765,1,
+gateoff,invoice_ids,150,37,needle,INV-2026-0038,0,15,3342,766,1,
+gateoff,invoice_ids,150,38,needle,INV-2026-0039,0,15,3342,766,1,
+gateoff,invoice_ids,150,75,needle,INV-2026-0076,0,15,3342,766,1,
+gateoff,invoice_ids,150,112,needle,INV-2026-0113,1,15,3343,767,1,
+gateoff,invoice_ids,150,149,needle,INV-2026-0150,1,15,3343,767,1,
+gateoff,invoice_ids,150,-1,count,,,15,3324,748,1,4
+gateoff,invoice_ids,150,-1,first,,,15,3310,734,1,4
+gateoff,invoice_ids,150,-1,spread,,,15,3361,785,1,4
+gateoff,invoice_ids,400,0,needle,INV-2026-0001,1,15,8091,765,1,
+gateoff,invoice_ids,400,3,needle,INV-2026-0004,1,15,8091,765,1,
+gateoff,invoice_ids,400,100,needle,INV-2026-0101,0,15,8093,767,1,
+gateoff,invoice_ids,400,101,needle,INV-2026-0102,0,15,8093,767,1,
+gateoff,invoice_ids,400,200,needle,INV-2026-0201,0,15,8093,767,1,
+gateoff,invoice_ids,400,300,needle,INV-2026-0301,0,15,8093,767,1,
+gateoff,invoice_ids,400,399,needle,INV-2026-0400,1,15,8093,767,1,
+gateoff,invoice_ids,400,-1,count,,,15,8074,748,1,4
+gateoff,invoice_ids,400,-1,first,,,15,8060,734,1,4
+gateoff,invoice_ids,400,-1,spread,,,15,8111,785,1,4
+gateoff,invoice_ids,1000,0,needle,INV-2026-0001,1,15,19492,766,1,
+gateoff,invoice_ids,1000,3,needle,INV-2026-0004,1,15,19492,766,1,
+gateoff,invoice_ids,1000,250,needle,INV-2026-0251,0,15,19494,768,1,
+gateoff,invoice_ids,1000,251,needle,INV-2026-0252,0,15,19494,768,1,
+gateoff,invoice_ids,1000,500,needle,INV-2026-0501,0,15,19494,768,1,
+gateoff,invoice_ids,1000,750,needle,INV-2026-0751,0,15,19494,768,1,
+gateoff,invoice_ids,1000,999,needle,INV-2026-1000,1,15,19494,768,1,
+gateoff,invoice_ids,1000,-1,count,,,15,19475,749,1,4
+gateoff,invoice_ids,1000,-1,first,,,15,19461,735,1,4
+gateoff,invoice_ids,1000,-1,spread,,,15,19512,786,1,4
+gateoff,file_paths,20,0,needle,src/auth/manager_000.py,1,15,1125,964,1,
+gateoff,file_paths,20,3,needle,src/worker/manager_003.py,1,15,1129,968,1,
+gateoff,file_paths,20,5,needle,src/proxy/manager_005.py,1,15,1127,966,1,
+gateoff,file_paths,20,6,needle,src/codec/manager_006.py,1,15,1127,966,1,
+gateoff,file_paths,20,10,needle,src/worker/handler_010.py,1,15,1130,969,1,
+gateoff,file_paths,20,15,needle,src/billing/client_015.py,0,15,1130,969,1,
+gateoff,file_paths,20,19,needle,src/proxy/client_019.py,1,15,1126,965,1,
+gateoff,file_paths,20,-1,count,,,15,1078,917,1,10
+gateoff,file_paths,20,-1,first,,,15,1064,903,1,10
+gateoff,file_paths,20,-1,spread,,,15,1115,954,1,10
+gateoff,file_paths,60,0,needle,src/auth/manager_000.py,1,14,2309,919,1,
+gateoff,file_paths,60,3,needle,src/worker/manager_003.py,1,14,2313,923,1,
+gateoff,file_paths,60,15,needle,src/billing/client_015.py,0,14,2314,924,1,
+gateoff,file_paths,60,16,needle,src/session/client_016.py,0,14,2314,924,1,
+gateoff,file_paths,60,30,needle,src/session/router_030.py,0,14,2314,924,1,
+gateoff,file_paths,60,45,needle,src/worker/manager_045.py,0,14,2314,924,1,
+gateoff,file_paths,60,59,needle,src/worker/client_059.py,1,14,2312,922,1,
+gateoff,file_paths,60,-1,count,,,14,2262,872,1,5
+gateoff,file_paths,60,-1,first,,,14,2248,858,1,5
+gateoff,file_paths,60,-1,spread,,,14,2299,909,1,5
+gateoff,file_paths,150,0,needle,src/auth/manager_000.py,1,15,4968,948,1,
+gateoff,file_paths,150,3,needle,src/worker/manager_003.py,1,15,4972,952,1,
+gateoff,file_paths,150,37,needle,src/session/utils_037.py,0,15,4971,951,1,
+gateoff,file_paths,150,38,needle,src/worker/utils_038.py,0,15,4969,949,1,
+gateoff,file_paths,150,75,needle,src/proxy/router_075.py,0,15,4969,949,1,
+gateoff,file_paths,150,112,needle,src/auth/router_112.py,1,15,4968,948,1,
+gateoff,file_paths,150,149,needle,src/session/store_149.py,1,15,4972,952,1,
+gateoff,file_paths,150,-1,count,,,15,4921,901,1,4
+gateoff,file_paths,150,-1,first,,,15,4907,887,1,4
+gateoff,file_paths,150,-1,spread,,,15,4958,938,1,4
+gateoff,file_paths,400,0,needle,src/auth/manager_000.py,1,15,12360,951,1,
+gateoff,file_paths,400,3,needle,src/worker/manager_003.py,1,15,12364,955,1,
+gateoff,file_paths,400,100,needle,src/session/client_100.py,0,15,12366,957,1,
+gateoff,file_paths,400,101,needle,src/worker/client_101.py,0,15,12364,955,1,
+gateoff,file_paths,400,200,needle,src/cache/router_200.py,0,15,12362,953,1,
+gateoff,file_paths,400,300,needle,src/codec/manager_300.py,0,15,12364,955,1,
+gateoff,file_paths,400,399,needle,src/auth/store_399.py,1,15,12358,949,1,
+gateoff,file_paths,400,-1,count,,,15,12313,904,1,4
+gateoff,file_paths,400,-1,first,,,15,12299,890,1,4
+gateoff,file_paths,400,-1,spread,,,15,12350,941,1,4
+gateoff,file_paths,1000,0,needle,src/auth/manager_000.py,1,15,30100,962,1,
+gateoff,file_paths,1000,3,needle,src/worker/manager_003.py,1,15,30104,966,1,
+gateoff,file_paths,1000,250,needle,src/proxy/utils_250.py,0,15,30100,962,1,
+gateoff,file_paths,1000,251,needle,src/codec/utils_251.py,0,15,30100,962,1,
+gateoff,file_paths,1000,500,needle,src/worker/utils_500.py,0,15,30102,964,1,
+gateoff,file_paths,1000,750,needle,src/billing/utils_750.py,0,15,30104,966,1,
+gateoff,file_paths,1000,999,needle,src/proxy/router_999.py,1,15,30102,964,1,
+gateoff,file_paths,1000,-1,count,,,15,30053,915,1,4
+gateoff,file_paths,1000,-1,first,,,15,30039,901,1,4
+gateoff,file_paths,1000,-1,spread,,,15,30090,952,1,4
+gateoff,log_lines,20,0,needle,2026-08-14T09:00:00Z INFO worker-0 processed batch 4000 in 50ms,1,14,1958,1530,1,
+gateoff,log_lines,20,3,needle,2026-08-14T09:00:03Z INFO worker-3 processed batch 4003 in 53ms,1,14,1958,1530,1,
+gateoff,log_lines,20,5,needle,2026-08-14T09:00:05Z DEBUG worker-5 processed batch 4005 in 55ms,0,14,1960,1532,1,
+gateoff,log_lines,20,6,needle,2026-08-14T09:00:06Z INFO worker-6 processed batch 4006 in 56ms,1,14,1958,1530,1,
+gateoff,log_lines,20,10,needle,2026-08-14T09:00:10Z WARN worker-10 processed batch 4010 in 60ms,1,14,1961,1533,1,
+gateoff,log_lines,20,15,needle,2026-08-14T09:00:15Z INFO worker-15 processed batch 4015 in 65ms,0,14,1961,1533,1,
+gateoff,log_lines,20,19,needle,2026-08-14T09:00:19Z WARN worker-3 processed batch 4019 in 69ms,1,14,1959,1531,1,
+gateoff,log_lines,20,-1,count,,,14,1863,1435,1,7
+gateoff,log_lines,20,-1,first,,,14,1849,1421,1,7
+gateoff,log_lines,20,-1,spread,,,14,1900,1472,1,7
+gateoff,log_lines,60,0,needle,2026-08-14T09:00:00Z INFO worker-0 processed batch 4000 in 50ms,1,16,4756,1673,1,
+gateoff,log_lines,60,3,needle,2026-08-14T09:00:03Z INFO worker-3 processed batch 4003 in 53ms,1,16,4756,1673,1,
+gateoff,log_lines,60,15,needle,2026-08-14T09:00:15Z INFO worker-15 processed batch 4015 in 65ms,1,16,4759,1676,1,
+gateoff,log_lines,60,16,needle,2026-08-14T09:00:16Z WARN worker-0 processed batch 4016 in 66ms,0,16,4757,1674,1,
+gateoff,log_lines,60,30,needle,2026-08-14T09:00:30Z INFO worker-14 processed batch 4030 in 80ms,1,16,4759,1676,1,
+gateoff,log_lines,60,45,needle,2026-08-14T09:00:45Z INFO worker-13 processed batch 4045 in 95ms,1,16,4759,1676,1,
+gateoff,log_lines,60,59,needle,2026-08-14T09:00:59Z DEBUG worker-11 processed batch 4059 in 109ms,1,16,4763,1680,1,
+gateoff,log_lines,60,-1,count,,,16,4661,1578,1,5
+gateoff,log_lines,60,-1,first,,,16,4647,1564,1,5
+gateoff,log_lines,60,-1,spread,,,16,4698,1615,1,5
+gateoff,log_lines,150,0,needle,2026-08-14T09:00:00Z INFO worker-0 processed batch 4000 in 50ms,1,14,11071,1546,1,
+gateoff,log_lines,150,3,needle,2026-08-14T09:00:03Z INFO worker-3 processed batch 4003 in 53ms,1,14,11071,1546,1,
+gateoff,log_lines,150,37,needle,2026-08-14T09:00:37Z WARN worker-5 processed batch 4037 in 87ms,1,14,11072,1547,1,
+gateoff,log_lines,150,38,needle,2026-08-14T09:00:38Z DEBUG worker-6 processed batch 4038 in 88ms,0,14,11074,1549,1,
+gateoff,log_lines,150,75,needle,2026-08-14T09:01:15Z INFO worker-11 processed batch 4075 in 125ms,0,14,11076,1551,1,
+gateoff,log_lines,150,112,needle,2026-08-14T09:01:52Z WARN worker-0 processed batch 4112 in 72ms,0,14,11073,1548,1,
+gateoff,log_lines,150,149,needle,2026-08-14T09:02:29Z DEBUG worker-5 processed batch 4149 in 109ms,1,14,11077,1552,1,
+gateoff,log_lines,150,-1,count,,,14,10976,1451,1,4
+gateoff,log_lines,150,-1,first,,,14,10962,1437,1,4
+gateoff,log_lines,150,-1,spread,,,14,11013,1488,1,4
+gateoff,log_lines,400,0,needle,2026-08-14T09:00:00Z INFO worker-0 processed batch 4000 in 50ms,1,26,28610,2403,1,
+gateoff,log_lines,400,3,needle,2026-08-14T09:00:03Z INFO worker-3 processed batch 4003 in 53ms,1,26,28610,2403,1,
+gateoff,log_lines,400,100,needle,2026-08-14T09:01:40Z WARN worker-4 processed batch 4100 in 60ms,0,26,28612,2405,1,
+gateoff,log_lines,400,101,needle,2026-08-14T09:01:41Z DEBUG worker-5 processed batch 4101 in 61ms,0,26,28614,2407,1,
+gateoff,log_lines,400,200,needle,2026-08-14T09:03:20Z DEBUG worker-8 processed batch 4200 in 70ms,0,26,28614,2407,1,
+gateoff,log_lines,400,300,needle,2026-08-14T09:05:00Z INFO worker-12 processed batch 4300 in 80ms,0,26,28614,2407,1,
+gateoff,log_lines,400,399,needle,2026-08-14T09:06:39Z INFO worker-15 processed batch 4399 in 89ms,1,26,28614,2407,1,
+gateoff,log_lines,400,-1,count,,,26,28515,2308,1,4
+gateoff,log_lines,400,-1,first,,,26,28501,2294,1,4
+gateoff,log_lines,400,-1,spread,,,26,28552,2345,1,4
+gateoff,log_lines,1000,0,needle,2026-08-14T09:00:00Z INFO worker-0 processed batch 4000 in 50ms,1,64,70713,5100,1,
+gateoff,log_lines,1000,3,needle,2026-08-14T09:00:03Z INFO worker-3 processed batch 4003 in 53ms,1,64,70713,5100,1,
+gateoff,log_lines,1000,250,needle,2026-08-14T09:04:10Z WARN worker-10 processed batch 4250 in 120ms,0,64,70719,5106,1,
+gateoff,log_lines,1000,251,needle,2026-08-14T09:04:11Z DEBUG worker-11 processed batch 4251 in 121ms,1,64,70721,5108,1,
+gateoff,log_lines,1000,500,needle,2026-08-14T09:08:20Z DEBUG worker-4 processed batch 4500 in 100ms,0,64,70719,5106,1,
+gateoff,log_lines,1000,750,needle,2026-08-14T09:12:30Z INFO worker-14 processed batch 4750 in 80ms,0,64,70717,5104,1,
+gateoff,log_lines,1000,999,needle,2026-08-14T09:16:39Z INFO worker-7 processed batch 4999 in 59ms,1,64,70715,5102,1,
+gateoff,log_lines,1000,-1,count,,,64,70618,5005,1,4
+gateoff,log_lines,1000,-1,first,,,64,70604,4991,1,4
+gateoff,log_lines,1000,-1,spread,,,64,70655,5042,1,4
+gateoff,test_names,20,0,needle,tests/unit/test_session_manager.py::test_refresh_expired_token_000,1,16,1882,1605,1,
+gateoff,test_names,20,3,needle,tests/unit/test_cache_layer.py::test_evict_lru_entry_003,1,16,1862,1585,1,
+gateoff,test_names,20,5,needle,tests/unit/test_billing_engine.py::test_refresh_expired_token_005,1,16,1880,1603,1,
+gateoff,test_names,20,6,needle,tests/unit/test_auth_flow.py::test_reject_bad_signature_006,1,16,1868,1591,1,
+gateoff,test_names,20,10,needle,tests/unit/test_auth_flow.py::test_refresh_expired_token_010,1,16,1871,1594,1,
+gateoff,test_names,20,15,needle,tests/unit/test_cache_layer.py::test_refresh_expired_token_015,0,16,1875,1598,1,
+gateoff,test_names,20,19,needle,tests/unit/test_cache_layer.py::test_parse_iso_timestamp_019,1,16,1871,1594,1,
+gateoff,test_names,20,-1,count,,,16,1785,1508,1,10
+gateoff,test_names,20,-1,first,,,16,1771,1494,1,10
+gateoff,test_names,20,-1,spread,,,16,1822,1545,1,10
+gateoff,test_names,60,0,needle,tests/unit/test_session_manager.py::test_refresh_expired_token_000,1,15,4508,1526,1,
+gateoff,test_names,60,3,needle,tests/unit/test_cache_layer.py::test_evict_lru_entry_003,1,15,4488,1506,1,
+gateoff,test_names,60,15,needle,tests/unit/test_cache_layer.py::test_refresh_expired_token_015,0,15,4501,1519,1,
+gateoff,test_names,60,16,needle,tests/unit/test_session_manager.py::test_reject_bad_signature_016,0,15,4507,1525,1,
+gateoff,test_names,60,30,needle,tests/unit/test_auth_flow.py::test_refresh_expired_token_030,0,15,4497,1515,1,
+gateoff,test_names,60,45,needle,tests/unit/test_billing_engine.py::test_refresh_expired_token_045,0,15,4507,1525,1,
+gateoff,test_names,60,59,needle,tests/unit/test_cache_layer.py::test_parse_iso_timestamp_059,1,15,4497,1515,1,
+gateoff,test_names,60,-1,count,,,15,4411,1429,1,5
+gateoff,test_names,60,-1,first,,,15,4397,1415,1,5
+gateoff,test_names,60,-1,spread,,,15,4448,1466,1,5
+gateoff,test_names,150,0,needle,tests/unit/test_session_manager.py::test_refresh_expired_token_000,1,16,10422,1541,1,
+gateoff,test_names,150,3,needle,tests/unit/test_cache_layer.py::test_evict_lru_entry_003,1,16,10402,1521,1,
+gateoff,test_names,150,37,needle,tests/unit/test_billing_engine.py::test_retry_on_429_037,0,16,10403,1522,1,
+gateoff,test_names,150,38,needle,tests/unit/test_auth_flow.py::test_evict_lru_entry_038,0,16,10399,1518,1,
+gateoff,test_names,150,75,needle,tests/unit/test_cache_layer.py::test_refresh_expired_token_075,0,16,10415,1534,1,
+gateoff,test_names,150,112,needle,tests/unit/test_session_manager.py::test_retry_on_429_112,0,16,10406,1525,1,
+gateoff,test_names,150,149,needle,tests/unit/test_billing_engine.py::test_parse_iso_timestamp_149,1,16,10418,1537,1,
+gateoff,test_names,150,-1,count,,,16,10325,1444,1,4
+gateoff,test_names,150,-1,first,,,16,10311,1430,1,4
+gateoff,test_names,150,-1,spread,,,16,10362,1481,1,4
+gateoff,test_names,400,0,needle,tests/unit/test_session_manager.py::test_refresh_expired_token_000,1,25,26830,2019,1,
+gateoff,test_names,400,3,needle,tests/unit/test_cache_layer.py::test_evict_lru_entry_003,1,25,26810,1999,1,
+gateoff,test_names,400,100,needle,tests/unit/test_session_manager.py::test_refresh_expired_token_100,0,25,26832,2021,1,
+gateoff,test_names,400,101,needle,tests/unit/test_billing_engine.py::test_reject_bad_signature_101,0,25,26828,2017,1,
+gateoff,test_names,400,200,needle,tests/unit/test_session_manager.py::test_refresh_expired_token_200,0,25,26832,2021,1,
+gateoff,test_names,400,300,needle,tests/unit/test_session_manager.py::test_refresh_expired_token_300,0,25,26832,2021,1,
+gateoff,test_names,400,399,needle,tests/unit/test_cache_layer.py::test_parse_iso_timestamp_399,1,25,26820,2009,1,
+gateoff,test_names,400,-1,count,,,25,26733,1922,1,4
+gateoff,test_names,400,-1,first,,,25,26719,1908,1,4
+gateoff,test_names,400,-1,spread,,,25,26770,1959,1,4
+gateoff,test_names,1000,0,needle,tests/unit/test_session_manager.py::test_refresh_expired_token_000,1,55,66221,3700,1,
+gateoff,test_names,1000,3,needle,tests/unit/test_cache_layer.py::test_evict_lru_entry_003,1,55,66201,3680,1,
+gateoff,test_names,1000,250,needle,tests/unit/test_auth_flow.py::test_refresh_expired_token_250,0,55,66211,3690,1,
+gateoff,test_names,1000,251,needle,tests/unit/test_cache_layer.py::test_reject_bad_signature_251,0,55,66213,3692,1,
+gateoff,test_names,1000,500,needle,tests/unit/test_session_manager.py::test_refresh_expired_token_500,0,55,66223,3702,1,
+gateoff,test_names,1000,750,needle,tests/unit/test_auth_flow.py::test_refresh_expired_token_750,0,55,66211,3690,1,
+gateoff,test_names,1000,999,needle,tests/unit/test_cache_layer.py::test_parse_iso_timestamp_999,1,55,66211,3690,1,
+gateoff,test_names,1000,-1,count,,,55,66124,3603,1,4
+gateoff,test_names,1000,-1,first,,,55,66110,3589,1,4
+gateoff,test_names,1000,-1,spread,,,55,66161,3640,1,4
+gateoff,numeric_ids,20,0,needle,8800000,1,15,732,656,1,
+gateoff,numeric_ids,20,3,needle,8800111,1,15,732,656,1,
+gateoff,numeric_ids,20,5,needle,8800185,1,15,732,656,1,
+gateoff,numeric_ids,20,6,needle,8800222,1,15,732,656,1,
+gateoff,numeric_ids,20,10,needle,8800370,1,15,733,657,1,
+gateoff,numeric_ids,20,15,needle,8800555,0,15,733,657,1,
+gateoff,numeric_ids,20,19,needle,8800703,1,15,733,657,1,
+gateoff,numeric_ids,20,-1,count,,,15,733,657,1,10
+gateoff,numeric_ids,20,-1,first,,,15,719,643,1,10
+gateoff,numeric_ids,20,-1,spread,,,15,770,694,1,10
+gateoff,numeric_ids,60,0,needle,8800000,1,15,1252,656,1,
+gateoff,numeric_ids,60,3,needle,8800111,1,15,1252,656,1,
+gateoff,numeric_ids,60,15,needle,8800555,1,15,1253,657,1,
+gateoff,numeric_ids,60,16,needle,8800592,0,15,1253,657,1,
+gateoff,numeric_ids,60,30,needle,8801110,1,15,1253,657,1,
+gateoff,numeric_ids,60,45,needle,8801665,1,15,1253,657,1,
+gateoff,numeric_ids,60,59,needle,8802183,1,15,1253,657,1,
+gateoff,numeric_ids,60,-1,count,,,15,1253,657,1,5
+gateoff,numeric_ids,60,-1,first,,,15,1239,643,1,5
+gateoff,numeric_ids,60,-1,spread,,,15,1290,694,1,5
+gateoff,numeric_ids,150,0,needle,8800000,1,15,2423,657,1,
+gateoff,numeric_ids,150,3,needle,8800111,1,15,2423,657,1,
+gateoff,numeric_ids,150,37,needle,8801369,0,15,2424,658,1,
+gateoff,numeric_ids,150,38,needle,8801406,0,15,2424,658,1,
+gateoff,numeric_ids,150,75,needle,8802775,0,15,2424,658,1,
+gateoff,numeric_ids,150,112,needle,8804144,1,15,2425,659,1,
+gateoff,numeric_ids,150,149,needle,8805513,1,15,2425,659,1,
+gateoff,numeric_ids,150,-1,count,,,15,2424,658,1,4
+gateoff,numeric_ids,150,-1,first,,,15,2410,644,1,4
+gateoff,numeric_ids,150,-1,spread,,,15,2461,695,1,4
+gateoff,numeric_ids,400,0,needle,8800000,1,15,5673,657,1,
+gateoff,numeric_ids,400,3,needle,8800111,1,15,5673,657,1,
+gateoff,numeric_ids,400,100,needle,8803700,0,15,5675,659,1,
+gateoff,numeric_ids,400,101,needle,8803737,0,15,5675,659,1,
+gateoff,numeric_ids,400,200,needle,8807400,0,15,5675,659,1,
+gateoff,numeric_ids,400,300,needle,8811100,0,15,5675,659,1,
+gateoff,numeric_ids,400,399,needle,8814763,1,15,5675,659,1,
+gateoff,numeric_ids,400,-1,count,,,15,5674,658,1,4
+gateoff,numeric_ids,400,-1,first,,,15,5660,644,1,4
+gateoff,numeric_ids,400,-1,spread,,,15,5711,695,1,4
+gateoff,numeric_ids,1000,0,needle,8800000,1,15,13474,658,1,
+gateoff,numeric_ids,1000,3,needle,8800111,1,15,13474,658,1,
+gateoff,numeric_ids,1000,250,needle,8809250,0,15,13476,660,1,
+gateoff,numeric_ids,1000,251,needle,8809287,0,15,13476,660,1,
+gateoff,numeric_ids,1000,500,needle,8818500,0,15,13476,660,1,
+gateoff,numeric_ids,1000,750,needle,8827750,0,15,13476,660,1,
+gateoff,numeric_ids,1000,999,needle,8836963,1,15,13476,660,1,
+gateoff,numeric_ids,1000,-1,count,,,15,13475,659,1,4
+gateoff,numeric_ids,1000,-1,first,,,15,13461,645,1,4
+gateoff,numeric_ids,1000,-1,spread,,,15,13512,696,1,4

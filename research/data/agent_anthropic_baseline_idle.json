@@ -1,0 +1,81 @@
+{
+  "arm": "baseline-idle",
+  "model": "claude-sonnet-4-5-20250929",
+  "salt": "A7700577",
+  "probe": "task_A7700577_0150",
+  "expected": "2050",
+  "turn1_survivors": 300,
+  "n_lines": 300,
+  "rows": [
+    {
+      "turn": 2,
+      "retained": 300,
+      "bytes": 13930,
+      "probe_in_context": true,
+      "correct": true,
+      "cache_read": 0,
+      "cache_write": 8548,
+      "answer": "2050"
+    },
+    {
+      "turn": 3,
+      "retained": 300,
+      "bytes": 13930,
+      "probe_in_context": true,
+      "correct": true,
+      "cache_read": 0,
+      "cache_write": 8548,
+      "answer": "2050"
+    },
+    {
+      "turn": 4,
+      "retained": 300,
+      "bytes": 13930,
+      "probe_in_context": true,
+      "correct": true,
+      "cache_read": 8548,
+      "cache_write": 0,
+      "answer": "2050"
+    },
+    {
+      "turn": 5,
+      "retained": 300,
+      "bytes": 13930,
+      "probe_in_context": true,
+      "correct": true,
+      "cache_read": 0,
+      "cache_write": 8548,
+      "answer": "2050"
+    },
+    {
+      "turn": 6,
+      "retained": 300,
+      "bytes": 13930,
+      "probe_in_context": true,
+      "correct": true,
+      "cache_read": 8548,
+      "cache_write": 0,
+      "answer": "2050"
+    },
+    {
+      "turn": 7,
+      "retained": 300,
+      "bytes": 13930,
+      "probe_in_context": true,
+      "correct": true,
+      "cache_read": 0,
+      "cache_write": 8548,
+      "answer": "2050"
+    },
+    {
+      "turn": 8,
+      "retained": 300,
+      "bytes": 13930,
+      "probe_in_context": true,
+      "correct": true,
+      "cache_read": 8548,
+      "cache_write": 0,
+      "answer": "2050"
+    }
+  ]
+}

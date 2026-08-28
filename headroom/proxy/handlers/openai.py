@@ -3452,8 +3452,17 @@ class OpenAIHandlerMixin:
                     # cache has no compressible entry for it yet; otherwise
                     # OpenAI-compatible tool-call clients freeze the entire
                     # conversation and report near-zero savings.
+                    _tracker_fc = openai_frozen_count
                     if not is_cache_mode(self.config.mode):
                         openai_frozen_count = comp_cache.compute_frozen_count(messages)
+                    if os.environ.get("HEADROOM_FROZEN_TRACE"):
+                        import sys as _s
+                        print(
+                            f"[frozen] openai nmsg={len(messages)} "
+                            f"tracker={_tracker_fc} "
+                            f"compute={comp_cache.compute_frozen_count(messages)} "
+                            f"final={openai_frozen_count} (assign)",
+                            file=_s.stderr, flush=True)
 
                     result = await self._run_compression_in_executor(
                         lambda: self.openai_pipeline.apply(

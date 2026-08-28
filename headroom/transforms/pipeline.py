@@ -253,6 +253,13 @@ class TransformPipeline:
         Returns:
             Combined TransformResult.
         """
+        if __import__("os").environ.get("HEADROOM_FROZEN_TRACE"):
+            import sys as _s
+            print(
+                f"[frozen] provider={self._provider_name()} "
+                f"nmsg={len(messages)} "
+                f"frozen={kwargs.get('frozen_message_count')}",
+                file=_s.stderr, flush=True)
         record_metrics = kwargs.pop("record_metrics", True)
         waste_messages = kwargs.pop("waste_messages", None)
         waste_signal_token_limit = int(

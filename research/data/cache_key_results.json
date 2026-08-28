@@ -1,0 +1,176 @@
+{
+  "content": [
+    {
+      "turn": 1,
+      "target": "INV-2026-0061",
+      "kept": 15,
+      "target_kept": true,
+      "bytes_out": 731
+    },
+    {
+      "turn": 2,
+      "target": "INV-2026-0121",
+      "kept": 14,
+      "target_kept": false,
+      "bytes_out": 824
+    },
+    {
+      "turn": 3,
+      "target": "INV-2026-0181",
+      "kept": 13,
+      "target_kept": false,
+      "bytes_out": 917
+    },
+    {
+      "turn": 4,
+      "target": "INV-2026-0241",
+      "kept": 12,
+      "target_kept": false,
+      "bytes_out": 1010
+    },
+    {
+      "turn": 5,
+      "target": "INV-2026-0091",
+      "kept": 11,
+      "target_kept": false,
+      "bytes_out": 1103
+    },
+    {
+      "turn": 6,
+      "target": "INV-2026-0151",
+      "kept": 10,
+      "target_kept": false,
+      "bytes_out": 1196
+    },
+    {
+      "turn": 7,
+      "target": "INV-2026-0211",
+      "kept": 9,
+      "target_kept": false,
+      "bytes_out": 1289
+    },
+    {
+      "turn": 8,
+      "target": "INV-2026-0031",
+      "kept": 8,
+      "target_kept": false,
+      "bytes_out": 1382
+    }
+  ],
+  "query": [
+    {
+      "turn": 1,
+      "target": "INV-2026-0061",
+      "kept": 15,
+      "target_kept": true,
+      "bytes_out": 729
+    },
+    {
+      "turn": 2,
+      "target": "INV-2026-0121",
+      "kept": 14,
+      "target_kept": false,
+      "bytes_out": 822
+    },
+    {
+      "turn": 3,
+      "target": "INV-2026-0181",
+      "kept": 13,
+      "target_kept": false,
+      "bytes_out": 915
+    },
+    {
+      "turn": 4,
+      "target": "INV-2026-0241",
+      "kept": 12,
+      "target_kept": false,
+      "bytes_out": 1008
+    },
+    {
+      "turn": 5,
+      "target": "INV-2026-0091",
+      "kept": 11,
+      "target_kept": false,
+      "bytes_out": 1101
+    },
+    {
+      "turn": 6,
+      "target": "INV-2026-0151",
+      "kept": 10,
+      "target_kept": false,
+      "bytes_out": 1194
+    },
+    {
+      "turn": 7,
+      "target": "INV-2026-0211",
+      "kept": 9,
+      "target_kept": false,
+      "bytes_out": 1287
+    },
+    {
+      "turn": 8,
+      "target": "INV-2026-0031",
+      "kept": 8,
+      "target_kept": false,
+      "bytes_out": 1380
+    }
+  ],
+  "anchors": [
+    {
+      "turn": 1,
+      "target": "INV-2026-0061",
+      "kept": 15,
+      "target_kept": true,
+      "bytes_out": 731
+    },
+    {
+      "turn": 2,
+      "target": "INV-2026-0121",
+      "kept": 14,
+      "target_kept": false,
+      "bytes_out": 824
+    },
+    {
+      "turn": 3,
+      "target": "INV-2026-0181",
+      "kept": 13,
+      "target_kept": false,
+      "bytes_out": 917
+    },
+    {
+      "turn": 4,
+      "target": "INV-2026-0241",
+      "kept": 12,
+      "target_kept": false,
+      "bytes_out": 1010
+    },
+    {
+      "turn": 5,
+      "target": "INV-2026-0091",
+      "kept": 11,
+      "target_kept": false,
+      "bytes_out": 1103
+    },
+    {
+      "turn": 6,
+      "target": "INV-2026-0151",
+      "kept": 10,
+      "target_kept": false,
+      "bytes_out": 1196
+    },
+    {
+      "turn": 7,
+      "target": "INV-2026-0211",
+      "kept": 9,
+      "target_kept": false,
+      "bytes_out": 1289
+    },
+    {
+      "turn": 8,
+      "target": "INV-2026-0031",
+      "kept": 8,
+      "target_kept": false,
+      "bytes_out": 1382
+    }
+  ]
+}

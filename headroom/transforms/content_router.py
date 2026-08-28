@@ -34,6 +34,9 @@ Pipeline Usage:
 
 from __future__ import annotations
 
+import os as _os_mod
+import re as _re_mod
+
 import asyncio
 import hashlib
 import json
@@ -280,6 +283,10 @@ def _invoke_smart_crusher(router: ContentRouter, inp: CompressInput) -> str | No
     if crusher is None:
         return None
     # ``_get_*`` getters are typed ``Any``; pin the result to the contract type.
+    if _os_mod.environ.get("HEADROOM_SC_TRACE"):
+        import sys as _s
+        print(f"[SC] len(content)={len(inp.content)} query={inp.query[:90]!r}",
+              file=_s.stderr, flush=True)
     compressed: str = crusher.crush(
         inp.content, query=inp.query, bias=_adapter_bias(inp)
     ).compressed
@@ -1240,6 +1247,9 @@ class CompressionCache:
         self._results: dict[int, tuple[str, float, str, float]] = {}
         # Tier 1: hashes of content that won't compress {hash: timestamp}
         self._skip: dict[int, float] = {}
+        # Hashes of strings this cache previously EMITTED as compressed output.
+        # Used by the idempotence guard to avoid re-compressing our own output.
+        self._outputs: set[int] = set()
         # Callbacks invoked (outside the lock) whenever ``clear()`` runs, so
         # sibling state keyed by the same content hashes (e.g. the router's
         # frozen-verdict store) can be reset in lock-step with the cache.
@@ -1290,6 +1300,20 @@ class CompressionCache:
                     del self._skip[key]
                     self._evictions += 1
             return False
+
+    def mark_output(self, compressed: str) -> None:
+        """Record that ``compressed`` is itself a compression OUTPUT.
+
+        Enables the idempotence guard: compressing an already-compressed
+        payload again is loss with no new information.
+        """
+        with self._lock:
+            self._outputs.add(hash(compressed))
+
+    def is_output(self, content: str) -> bool:
+        """True when ``content`` was produced by a previous compression."""
+        with self._lock:
+            return hash(content) in self._outputs
 
     def put(self, key: int, compressed: str, ratio: float, strategy: str) -> None:
         """Store a compressed result (Tier 2).  Thread-safe."""
@@ -1462,6 +1486,71 @@ class RouterCompressionResult:
                 f"{self.total_original_tokens:,}→{self.total_compressed_tokens:,} tokens "
                 f"({self.savings_percentage:.0f}% saved)"
             )
+
+
+# --- Query-aware compression cache key (research extension) ------------------
+#
+# Headroom's compressed-result cache is keyed on content alone:
+#     content_key = hash((content, target_ratio))
+# The query is passed to the compressor but never into the key. When the same
+# tool output recurs with a different question -- the normal shape of a
+# multi-turn agent session -- the router replays the FIRST question's
+# compression. That silently defeats every query-conditioned selection path
+# (dict-array relevance ranking, and query-aware scalar retention).
+#
+# HEADROOM_CACHE_KEY_MODE selects the policy:
+#   content  (default) -- upstream behaviour, byte-identical
+#   query    -- full query in the key: perfect freshness, worst hit rate
+#   anchors  -- only identifier-like tokens from the query: recovers hit rate
+#               on paraphrases while still separating different targets
+_CACHE_KEY_MODE = None
+_ANCHOR_RE = _re_mod.compile(r"[A-Za-z_][\w./-]*\d[\w./-]*|\b[A-Z][A-Z0-9_]{2,}\b")
+
+
+_IDEMPOTENT = None
+
+
+def idempotent_compression_enabled() -> bool:
+    """Guard against re-compressing a previous compression's output.
+
+    Default **off** so upstream behaviour is byte-identical. See
+    research/result-07: an unchanged tool output shrinks by one item per turn
+    because the proxy swaps its compressed form back into the conversation and
+    the router then compresses that again.
+    """
+    global _IDEMPOTENT
+    if _IDEMPOTENT is None:
+        _IDEMPOTENT = _os_mod.environ.get(
+            "HEADROOM_IDEMPOTENT_COMPRESSION", ""
+        ).strip().lower() in ("1", "true", "yes")
+    return _IDEMPOTENT
+
+
+def _cache_key_mode() -> str:
+    global _CACHE_KEY_MODE
+    if _CACHE_KEY_MODE is None:
+        _CACHE_KEY_MODE = (
+            _os_mod.environ.get("HEADROOM_CACHE_KEY_MODE", "content").strip().lower()
+        )
+    return _CACHE_KEY_MODE
+
+
+def query_cache_component(context: str | None) -> Any:
+    """Return the query component of the compression cache key.
+
+    ``None`` reproduces upstream keying exactly.
+    """
+    mode = _cache_key_mode()
+    if mode == "content" or not context:
+        return None
+    if mode == "query":
+        return context.strip()
+    if mode == "anchors":
+        # Identifier-like tokens only (INV-2026-0044, src/auth/x.py, TCK_12).
+        # Two questions about the same target share a key; questions about
+        # different targets do not.
+        return tuple(sorted(set(_ANCHOR_RE.findall(context or ""))))
+    return None
 
 
 @dataclass
@@ -5270,7 +5359,8 @@ class ContentRouter(Transform):
             # Tier 2 (result): known compresses → reuse compressed text.
             # Key on the runtime target_ratio too: the same content compressed at
             # a different ratio is a different result, so it must not alias.
-            content_key = hash((content, getattr(self, "_runtime_target_ratio", None)))
+            content_key = hash((content, getattr(self, "_runtime_target_ratio", None),
+                                query_cache_component(context)))
             # Tool ground truth is gated against lossy-unrecoverable results below
             # (#1307). Partition its cache namespace so a gated tool entry is never
             # served from — or poisons — an ungated entry for byte-identical content.
@@ -5483,6 +5573,7 @@ class ContentRouter(Transform):
                         accept_ratio,
                         result.strategy_used.value,
                     )
+                    self._cache.mark_output(result.compressed)
                     # Freeze "compress" so the cache-hit path above never
                     # re-applies a tighter min_ratio to this block.
                     if freeze_decision:
@@ -6174,7 +6265,8 @@ class ContentRouter(Transform):
                     # Two-tier compression cache → shared helper
                     compressed_content, was_compressed = self._compress_block_content(
                         content=tool_text,
-                        content_key=hash((tool_text, getattr(self, "_runtime_target_ratio", None))),
+                        content_key=hash((tool_text, getattr(self, "_runtime_target_ratio", None),
+                                          query_cache_component(block_context))),
                         context=block_context,
                         bias=bias,
                         min_ratio=min_ratio,
@@ -6245,7 +6337,8 @@ class ContentRouter(Transform):
                     compressed_content, _was_compressed = self._compress_block_content(
                         content=text_content,
                         content_key=hash(
-                            (text_content, getattr(self, "_runtime_target_ratio", None))
+                            (text_content, getattr(self, "_runtime_target_ratio", None),
+                             query_cache_component(context))
                         ),
                         context=context,
                         bias=1.0,
@@ -6337,6 +6430,17 @@ class ContentRouter(Transform):
         # ratio_too_high (which properly means "a lossy attempt didn't shrink
         # enough"). In CCR mode the ratio_too_high meaning is unchanged.
         _noop_bucket = "lossless_noop" if self.config.lossless else "ratio_too_high"
+
+        # Tier 0: idempotence guard (default off). If this exact string was
+        # emitted by an earlier compression, compressing it again destroys
+        # information without any new information having arrived.
+        if idempotent_compression_enabled() and self._cache.is_output(content):
+            if route_counts is not None:
+                route_counts["already_compressed"] = (
+                    route_counts.get("already_compressed", 0) + 1
+                )
+            return content, False
+
         # Tier 1: skip set — instant rejection
         if self._cache.is_skipped(content_key):
             if route_counts is not None:
@@ -6421,6 +6525,7 @@ class ContentRouter(Transform):
             _ll_ratio = len(result.compressed) / max(1, len(content))
             _ll_label = _chain[0] if _is_pure_lossless else "+".join(_chain)
             self._cache.put(content_key, result.compressed, _ll_ratio, _ll_label)
+            self._cache.mark_output(result.compressed)
             transforms_applied.append(f"router:{strategy_label}:{_ll_label}")
             if compressed_details is not None:
                 compressed_details.append(f"{details_prefix}:{_ll_label}:{_ll_ratio:.2f}")
@@ -6463,6 +6568,7 @@ class ContentRouter(Transform):
                 result.compression_ratio,
                 result.strategy_used.value,
             )
+            self._cache.mark_output(result.compressed)
             # Freeze "compress" so the cache-hit path above never re-applies a
             # tighter min_ratio to this block.
             if freeze_decision and self._frozen_verdict_recoverable(
